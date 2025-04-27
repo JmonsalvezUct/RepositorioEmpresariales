@@ -1,0 +1,48 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #000000;
+    margin: 0;
+    padding: 20px;
+    color: var(--text);
+  }
+  
+  /* Estilo exacto del dashboard basado en tu imagen */
+  .dashboard-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgb(0, 0, 0);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+  
+  /* Estilo del header como en la imagen */
+  .dashboard-header {
+    color: var(--primary);
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  
+  /* Estilo del texto introductorio */
+  .dashboard-text {
+    line-height: 1.6;
+    margin-bottom: 25px;
+    color: #555;
+  }
+  
+  /* Estilo del divisor */
+  .dashboard-divider {
+    border: none;
+    height: 1px;
+    background: var(--border);
+    margin: 25px 0;
+  }
+  
+  /* Estilo del checkbox idéntico a la imagen */
+  .dashboard-checkbox {
+    accent-color: var(--primary);
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+  }

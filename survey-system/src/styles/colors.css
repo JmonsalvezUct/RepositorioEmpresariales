@@ -1,0 +1,8 @@
+:root {
+    --primary-color: #3a7bd5; /* Azul principal */
+    --secondary-color: #00d2ff; /* Azul claro */
+    --text-color: #333333; /* Color de texto principal */
+    --light-gray: #000000; /* Fondo gris claro */
+    --border-color: #000000; /* Color de bordes */
+    --checkbox-color: #3a7bd5; /* Color del checkbox */
+  }

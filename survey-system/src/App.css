@@ -1,0 +1,98 @@
+/* Reset completo para evitar estilos no deseados */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilos base para el cuerpo */
+body {
+  background-color: #000000; /* Fondo negro absoluto */
+  color: #e0e0e0; /* Color de texto base */
+  font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Estilos para los contenedores principales */
+.app-container {
+  min-height: 100vh;
+  background-color: #000000;
+}
+
+/* Barra de navegación (si existe) */
+.navbar {
+  background-color: #121212 !important;
+  border-bottom: 1px solid #333333 !important;
+}
+
+/* Tarjetas y contenedores */
+.card {
+  background-color: #1e1e1e;
+  border: 1px solid #333333;
+  border-radius: 8px;
+}
+
+/* Textos */
+h1, h2, h3, h4, h5, h6 {
+  color: #ffffff;
+}
+
+p {
+  color: #b0b0b0;
+}
+
+/* Enlaces */
+a {
+  color: #3a7bd5;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #2c5fb3;
+}
+
+/* Formularios */
+input, textarea, select {
+  background-color: #252525 !important;
+  color: #ffffff !important;
+  border: 1px solid #333333 !important;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: #3a7bd5 !important;
+  box-shadow: 0 0 0 2px rgba(58, 123, 213, 0.3) !important;
+}
+
+/* Botones */
+button {
+  background-color: #3a7bd5;
+  color: white;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #2c5fb3;
+  transform: translateY(-1px);
+}
+
+/* Scrollbar (opcional) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3a7bd5;
+}
