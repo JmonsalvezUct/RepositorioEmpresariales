@@ -3,36 +3,38 @@ import Header from '../components/Header';
 import SurveyCard from '../components/SurveyCard';
 import SupportQuestion from '../components/SupportQuestion';
 
-const Dashboard = ({ userName }) => {
+const Dashboard = ({ user }) => {  // Cambiamos userName por user
   const navigate = useNavigate();
 
   return (
     <div style={{
       minHeight: '100vh',
-      backgroundColor: '#121212', // Fondo oscuro
+      backgroundColor: '#121212',
       padding: '20px',
-      color: '#e0e0e0' // Texto claro
+      color: '#e0e0e0'
     }}>
       <div style={{
         maxWidth: '800px',
         margin: '0 auto',
         padding: '30px',
-        backgroundColor: '#1e1e1e', // Card oscura
+        backgroundColor: '#1e1e1e',
         borderRadius: '12px',
         boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)',
         border: '1px solid #333'
       }}>
-        <Header title={`Hola, ${userName}`} darkMode />
+        {/* Mostramos user.name en lugar de userName */}
+        <Header title={`Hola, ${user?.name || 'Usuario'}`} darkMode />
         
         <p style={{
           lineHeight: '1.6',
           marginBottom: '25px',
           fontSize: '16px',
-          color: '#b0b0b0' // Texto más suave
+          color: '#b0b0b0'
         }}>
           Bienvenido a Encuestas360 el mejor sitio web de encuestas en el mundo.
         </p>
         
+        {/* Resto del código permanece igual */}
         <hr style={{
           border: 'none',
           height: '1px',
@@ -59,7 +61,7 @@ const Dashboard = ({ userName }) => {
             fontSize: '20px',
             marginBottom: '15px',
             fontWeight: '600',
-            color: '#ffffff' // Títulos más brillantes
+            color: '#ffffff'
           }}>Historial de Encuestas</h2>
           <button 
             onClick={() => navigate('/surveys')}

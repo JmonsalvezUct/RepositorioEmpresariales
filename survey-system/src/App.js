@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
+import Register from './pages/Register';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import SurveyDetail from './pages/SurveyDetail';
@@ -12,6 +13,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        
+        <Route path="/register" element={<Register setUser={setUser} />} />
         <Route path="/" element={<Login setUser={setUser} />} />
         <Route 
           path="/dashboard" 

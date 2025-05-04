@@ -1,22 +1,37 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { auth, signInWithEmailAndPassword } from './firebase';
 
 const Login = ({ setUser }) => {
   const navigate = useNavigate();
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    if (username && password) {
-      setIsLoading(true);
-      // Simulamos un pequeño delay para la experiencia de carga
-      setTimeout(() => {
-        setUser({ name: username });
-        navigate('/dashboard');
-        setIsLoading(false);
-      }, 800);
+    if (!email || !password) {
+      setError('Por favor ingresa email y contraseña');
+      return;
+    }
+
+    setIsLoading(true);
+    setError('');
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      // Usuario autenticado con éxito
+      setUser({ 
+        email: userCredential.user.email,
+        uid: userCredential.user.uid
+      });
+      navigate('/dashboard');
+    } catch (error) {
+      console.error('Error al iniciar sesión:', error);
+      setError(error.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -26,16 +41,18 @@ const Login = ({ setUser }) => {
         <h1 style={styles.title}>Bienvenido</h1>
         <p style={styles.subtitle}>Ingresa tus credenciales</p>
         
+        {error && <p style={styles.error}>{error}</p>}
+        
         <form onSubmit={handleLogin} style={styles.form}>
           <div style={styles.inputGroup}>
-            <label htmlFor="username" style={styles.label}>Usuario</label>
+            <label htmlFor="email" style={styles.label}>Correo Electrónico</label>
             <input
-              id="username"
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               style={styles.input}
-              placeholder="Ej: pepito123"
+              placeholder="Ej: usuario@correo.com"
               required
             />
           </div>
@@ -63,6 +80,10 @@ const Login = ({ setUser }) => {
             ) : 'Ingresar'}
           </button>
         </form>
+        
+        <p style={styles.registerLink}>
+          ¿No tienes una cuenta? <a href="/register" style={styles.link}>Regístrate</a>
+        </p>
       </div>
     </div>
   );
@@ -161,6 +182,29 @@ const styles = {
   '@keyframes spin': {
     '0%': { transform: 'rotate(0deg)' },
     '100%': { transform: 'rotate(360deg)' }
+  },
+  error: {
+    color: '#ff4d4d',
+    backgroundColor: 'rgba(255, 77, 77, 0.1)',
+    padding: '12px',
+    borderRadius: '8px',
+    fontSize: '14px',
+    marginBottom: '20px',
+    textAlign: 'center'
+  },
+  registerLink: {
+    color: '#aaa',
+    fontSize: '14px',
+    textAlign: 'center',
+    marginTop: '20px'
+  },
+  link: {
+    color: '#3a7bd5',
+    textDecoration: 'none',
+    fontWeight: '500',
+    ':hover': {
+      textDecoration: 'underline'
+    }
   }
 };
 
