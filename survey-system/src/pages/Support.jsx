@@ -1,17 +1,33 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { collection, addDoc, Timestamp } from 'firebase/firestore';
+import { db } from './firebase'; // Asegúrate de que este path sea correcto
 
 const Support = () => {
   const navigate = useNavigate();
   const [message, setMessage] = useState('');
   const [selectedOption, setSelectedOption] = useState(null);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Lógica para enviar la solicitud de soporte
-    console.log('Problema:', selectedOption);
-    console.log('Mensaje:', message);
-    navigate('/soporte-enviado');
+    setError('');
+
+    try {
+      // Agrega un documento a la colección "supportRequests"
+      const docRef = await addDoc(collection(db, 'supportRequests'), {
+        issue: selectedOption === 'problem' ? 'Tiene un problema' : 'Otro',
+        message,
+        createdAt: Timestamp.now()
+      });
+
+      console.log('🆗 Solicitud enviada con ID:', docRef.id);
+      alert('✅ ¡Respuesta enviada con éxito!');
+      navigate('/Dashboard');
+    } catch (err) {
+      console.error('❌ Error al enviar solicitud:', err);
+      setError('Ocurrió un error al enviar tu solicitud. Intenta de nuevo.');
+    }
   };
 
   return (
@@ -67,7 +83,7 @@ const Support = () => {
               <span style={{
                 color: selectedOption === 'problem' ? '#ffffff' : '#b0b0b0',
                 fontWeight: selectedOption === 'problem' ? '600' : '400'
-              }}>Si, poseo un problema.</span>
+              }}>Sí, poseo un problema.</span>
             </div>
           </div>
 
@@ -101,7 +117,13 @@ const Support = () => {
             />
           </div>
 
-          {/* Divisor */}
+          {/* Muestra error si ocurre */}
+          {error && (
+            <p style={{ color: 'salmon', marginBottom: '20px', textAlign: 'center' }}>
+              {error}
+            </p>
+          )}
+
           <hr style={{
             border: 'none',
             height: '1px',
@@ -118,16 +140,19 @@ const Support = () => {
               border: 'none',
               padding: '15px 30px',
               borderRadius: '6px',
-              cursor: 'pointer',
+              cursor: selectedOption && message ? 'pointer' : 'not-allowed',
               fontSize: '16px',
               fontWeight: '600',
               width: '100%',
-              transition: 'all 0.2s',
-              ':hover': {
-                backgroundColor: '#2c5fb3'
-              }
+              transition: 'all 0.2s'
             }}
             disabled={!selectedOption || !message}
+            onMouseOver={e => {
+              if (selectedOption && message) e.currentTarget.style.backgroundColor = '#2c5fb3';
+            }}
+            onMouseOut={e => {
+              e.currentTarget.style.backgroundColor = '#3a7bd5';
+            }}
           >
             Enviar Solicitud
           </button>

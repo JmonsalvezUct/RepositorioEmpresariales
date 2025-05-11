@@ -62,7 +62,7 @@ const Dashboard = ({ user }) => {  // Cambiamos userName por user
             marginBottom: '15px',
             fontWeight: '600',
             color: '#ffffff'
-          }}>Historial de Encuestas</h2>
+          }}>Envianos tu feedback personal</h2>
           <button 
             onClick={() => navigate('/surveys')}
             style={{

@@ -12,12 +12,12 @@ const SurveyList = () => {
     },
     {
       id: 2,
-      title: "Opinión sobre nuestro nuevo producto",
-      description: "Feedback sobre el lanzamiento"
+      title: "Opinión sobre la calidad de las encuestas",
+      description: "Feedback de calidad"
     },
     {
       id: 3,
-      title: "Cómo calificarías nuestro último evento",
+      title: "Cómo calificarías nuestra ultima actualizacion",
       description: "Evaluación de actividades"
     }
   ];
@@ -26,7 +26,7 @@ const SurveyList = () => {
     <div style={{
       minHeight: '100vh',
       backgroundColor: '#0a0a0a', // Negro ligeramente más claro
-      padding: '40px 20px',
+      padding: '40px 20px', 
       color: '#e0e0e0'
     }}>
       <div style={{
@@ -43,7 +43,7 @@ const SurveyList = () => {
           marginBottom: '30px',
           fontWeight: '600',
           textAlign: 'center'
-        }}>Historial de Encuestas</h1>
+        }}>Envianos tu feedback personal</h1>
 
         <div style={{ display: 'grid', gap: '20px' }}>
           {surveys.map((survey) => (
